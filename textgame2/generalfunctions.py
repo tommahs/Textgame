@@ -3,13 +3,20 @@
 def clearScreen():
     import subprocess
     subprocess.call('clear', shell=True)
-clearScreen()
+# clearScreen()
 
 def anyKey():
     import subprocess
     print('\nPress any key to continue.')
     subprocess.call('read', shell=True)
 # anyKey()
+
+
+#### Defining ability modifier:
+## ability score -10, /2 + extra modifiers if applyable
+def abilitymodifier(ability):
+    modifier = round((ability -10) /2)
+    return modifier
 
 
 ###### Fighting ######
@@ -31,3 +38,9 @@ def dice6():
     dice = roll
     return dice
 
+def dice20():
+    import random
+    dice = 0
+    roll = random.randint(1,21)
+    dice = roll
+    return dice

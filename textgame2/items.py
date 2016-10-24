@@ -12,12 +12,10 @@ def lookingAround(currloc, party):
     if encounternum <= 25:
         encounter(currloc, party, encounternum)
     else:
-    generalfunctions.anyKey()
-    #testing
-    # for a in enemylst:
-    #     print(a)
-    print(enemylst)
-    return enemylst
+        print("The scenery is really nice!")
+        generalfunctions.anyKey()
+    a=1
+    return a
 
 def encounter(currloc, party, num):
     import generalfunctions
@@ -30,7 +28,7 @@ def encounter(currloc, party, num):
         enemystats = enemy['stats']
         enemylst.append(enemy)
         # enemylst.append(enemystats)
-        # combatfunctions.fight(party, enemy)
+        # combatfunctions.fight(party, enemylst)
         print("You find an {}!".format(enemy['name']))
     elif num < 15:
         while counter is not 4:
@@ -39,7 +37,7 @@ def encounter(currloc, party, num):
             enemylst.append(enemy)
             enemylst.append(enemystats)
             counter += 1
-            # combatfunctions.fight(party, enemy)
+            # combatfunctions.fight(party, enemylst)
             print("You find an {}!".format(enemy['name']))
     elif num <= 25:
         while counter is not enemyamount:
@@ -48,13 +46,16 @@ def encounter(currloc, party, num):
             enemylst.append(enemy)
             enemylst.append(enemystats)
             counter +=1
-            # combatfunctions.fight(party, enemy)
+            # combatfunctions.fight(party, enemylst)
             print("You find an {}!".format(enemy['name']))
     else:
         print('No monster can be found')
-    print(enemylst)
-    print(enemylst[0]['stats']['dex'])
-    combatfunctions.fight(party, enemylst)
+    try:
+        combatfunctions.fight(party, enemylst)
+    finally:
+        print(enemylst)
+        print(enemylst[0]['stats']['dex'])
+        combatfunctions.fight2(party, enemylst)
     return enemylst
 
 lookingAround('Forest', player.player)

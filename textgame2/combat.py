@@ -5,32 +5,31 @@ import combatfunctions
 # 1. Define iniative per player & enemy
 # 2. Options per turn in battle
 # 3. Result
-import player, enemies, combatfunctions
+import player, enemies, generalfunctions
 
-players = [[player.player['name'].lower(), player.player['stats']['dex']]]
-enemies = [[enemies.bat['name'].lower(), enemies.bat['stats']['dex']], [enemies.worm['name'].lower(),enemies.worm['stats']['dex']]]
+players = [[player.player]]
+enemies = [[enemies.kingbat],[enemies.worm]]
 combat = []
 
 #####
 # 0. Creating the turnorder
-# def combinepe():
+#
+def combat(playerlst, enemylst):
+    iniativelst = combatfunctions.definiative(playerlst, enemylst)
+    # defturnorders = turnorder(iniativelst)
+    combatfunctions.fight2(playerlst, enemylst,iniativelst)
+    return iniativelst
 
-def definiative(char):
-    for charlist in players:
-        combat.append(charlist)
-    for charlist in enemies:
-        combat.append(charlist)
-    for lst in combat:
-        dex = lst[1]
-        modifier = combatfunctions.abilitymodifier(dex)
-        lst[1] = modifier
-    print(combat)
-    return combat
+def main(playerlst, enemylst):
+    turnorderlst = combatfunctions.turnorder(playerlst, enemylst)
+    enemylst = []
+    for enemy in turnorderlst:
+        if enemy['realplayer'] == 0:
+            enemylst.append(enemy)
+            # print("{}. {} ".format(enemy['enemynum'], enemy['name']))
+    for player in turnorderlst:
+        if player['realplayer'] == 1:
+            combatfunctions.chenemy(player, enemylst)
 
-definiative(players)
-
-
-
-
-
-
+print(main(players, enemies))
+# print(combat(players, enemies))
