@@ -4,7 +4,7 @@ player = {'name': 'Player',
           'lvl': 1,
           'xp': 0,
           'lvlNext' : 25,
-          'skillpoints': 0, # not implemented
+          'skillpoints': 0,
           'stats': {'str': 1,
                     'dex': 10, # not implemented in combat
                     'con': 1, # not implemented in combat

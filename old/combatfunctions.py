@@ -22,6 +22,7 @@ def turnorder(players, enemies):
         combat.append(player)
     for enemy in enemies:
         print(enemy[0]['name'])
+        print(enemy[0]['realplayer'])
         enemy[enemynum]['realplayer'] = 0
         enemy[enemynum]['enemynum'] = enemynum + 1
         combat.append(enemy[enemynum])
