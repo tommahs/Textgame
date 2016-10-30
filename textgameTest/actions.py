@@ -1,27 +1,50 @@
 # import generalfunctions, enemies, combat
 ###### Perception ####
 
-# def lookingAround(currloc,party):
-#     import generalfunctions
-#     enemyamount = generalfunctions.dice6()
-#     fight = generalfunctions.diceEncounter()
-#     if fight < 5:
-#         enemy = enemies.findenemy(currloc, 2)
-#         combat.fight(party, enemy)
-#     if fight < 15:
-#         enemy = enemies.findenemy(currloc, 1)
-#         combat.fight(party, enemy)
-#     elif fight <= 25:
-#         enemy = enemies.findenemy(currloc, 0)
-#         combat.fight(party, enemy)
-#     else:
-#         print('No monster can be found')
-#         generalfunctions.anyKey()
+def lookingaround(currloc,party):
+    import generalfunctions, actions, maincombat
+    enemyamount = generalfunctions.dice6()
+    fight = generalfunctions.diceEncounter()
+    if fight < 5:
+        enemylst = actions.findenemy(currloc, 2)
+        print("You got an encounter with an {}".format(enemylst[0]['name']))
+        maincombat.maincombat(party, enemylst)
+        return enemylst
+    if fight < 15:
+        enemylst = actions.findenemy(currloc, 1)
+        print("You got an encounter with an {}".format(enemylst[0]['name']))
+        maincombat.maincombat(party, enemylst)
+    elif fight <= 25:
+        enemylst = actions.findenemy(currloc, 0)
+        print("You got an encounter with an {}".format(enemylst[0]['name']))
+        maincombat.maincombat(party, enemylst)
+    else:
+        print('No monster can be found')
+        generalfunctions.anyKey()
 
 
 ####
 ##  Player Functions
 ####
+def showplayers(party):
+    playernum = 0
+    for each in party:
+        playernum += 1
+        print('{}. {}'.format(playernum, each['name']))
+
+
+def chplayer(party):
+    import generalfunctions
+    playernum = 0
+    chplayer = (input("Type playername :").lower()).capitalize()
+    for each in party:
+        if chplayer == each['name']:
+            curplayer = party[playernum]
+        else:
+            playernum += 1
+        generalfunctions.clearScreen()
+    return curplayer
+
 def showstats(char):
     import generalfunctions
     generalfunctions.clearScreen()
@@ -208,6 +231,32 @@ def hpcheck(lst):
 ######
 # Enemy functions
 ###
+
+
+def findenemy(currentlocation, num):
+    import enemies
+    enemyparty = []
+    if currentlocation == 'forest':
+        if num == 2:
+            mob = enemies.enemies['kingworm'].copy()
+        elif num == 1:
+            mob = enemies.enemies['bigworm'].copy()
+            enemyparty.append(mob)
+        elif num == 0:
+            mob = enemies.enemies['worm'].copy()
+        enemyparty.append(mob)
+    elif currentlocation == 'cave':
+        if num == 2:
+            mob = enemies.enemies['kingbat'].copy()
+        elif num == 1:
+            mob = enemies.enemies['bigbat'].copy()
+        elif num == 0:
+            mob = enemies.enemies['bat'].copy()
+        enemyparty.append(mob)
+    else:
+        mob = enemies.worm.copy()
+        enemyparty.append(mob)
+    return enemyparty
 
 def enemyattack(party):
     count = -1

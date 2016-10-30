@@ -1,15 +1,8 @@
 from random import randint
 import generalfunctions, actions, party, enemies
 currentlocation = 'forest'
-party = party.createparty()
-enemies = enemies.createenemies()
 
 def maincombat(party, enemies):
-    # Turnorder
-    # Per turn -> players get menu
-    #          -> enemies attack player
-    # if hp reaches 0, turn gets skipped
-    #
     turnorder = actions.turnorder(party, enemies)
     dead = []
     turn = 1
@@ -74,5 +67,3 @@ def choice2(each): # Use item
 def choice3(): #run from fight
     generalfunctions.clearScreen()
     print('You run away from the fight.')
-
-maincombat(party, enemies)
