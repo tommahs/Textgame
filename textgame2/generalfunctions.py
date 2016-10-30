@@ -44,3 +44,15 @@ def dice20():
     roll = random.randint(1,21)
     dice = roll
     return dice
+
+
+def chloc(curloc):
+    possiblelocations = ['Forest', 'Cave', 'City', 'Town']
+    for each in possiblelocations:
+        print(each, end = ' / ')
+    newlocation = input('\nWhere do you want to go?:').capitalize()
+    if newlocation in possiblelocations:
+        return newlocation
+    else:
+        print('failure')
+        return curloc

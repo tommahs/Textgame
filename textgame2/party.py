@@ -7,13 +7,13 @@ def currentparty(lst):
         print(char['name'])
     print()
 def createparty():
-    import Characters
+    import Characters, generalfunctions
     global party
     party = []
     addedtoparty = []
     loop = 1
-    print("Enter exit to stop adding characters to the party")
     while loop == 1:
+        print("Enter exit to stop adding characters to the party")
         partyadd = input("Please type in a character to join your party :\n").lower()
         player = partyadd
         try:
@@ -30,6 +30,7 @@ def createparty():
             if KeyError:
                 print("This player does not exist.\n")
                 continue
+        generalfunctions.clearScreen()
         currentparty(party)
         import generalfunctions
         for char in party:

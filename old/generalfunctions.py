@@ -44,3 +44,11 @@ def dice20():
     roll = random.randint(1,21)
     dice = roll
     return dice
+
+
+possiblelocations = ['Forest', 'Cave', 'City', 'Town']
+currentlocation = 'Forest'
+
+def chloc():
+    newlocation = input('Where do you want to go? Forest / Cave / City / Town :')
+    return newlocation
