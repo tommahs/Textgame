@@ -169,6 +169,7 @@ def turnorder(players, enemies):
 
 def shenemies(enemylst):
     enemynum = 0
+    print(enemylst)
     for each in enemylst:
         enemynum += 1
         print("{}. {}".format(each['enemynum'], each['name']))

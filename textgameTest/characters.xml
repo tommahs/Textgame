@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<root>
+	<tommahs type="dict">
+		<test2 type="int">2</test2>
+		<test type="int">1</test>
+	</tommahs>
+</root>

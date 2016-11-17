@@ -2,8 +2,8 @@ from random import randint
 import generalfunctions, actions, party, enemies
 currentlocation = 'forest'
 
-def maincombat(party, enemies):
-    turnorder = actions.turnorder(party, enemies)
+def maincombat(party, enemylst):
+    turnorder = actions.turnorder(party, enemylst)
     dead = []
     turn = 1
     loop = 1
@@ -19,18 +19,18 @@ def maincombat(party, enemies):
                     if hpcheck['realplayer'] == 1:
                         party.remove(hpcheck)
                     elif hpcheck['realplayer'] == 0:
-                        enemies.remove(hpcheck)
-            if len(enemies) == 0:
+                        enemylst.remove(hpcheck)
+            if len(enemylst) == 0:
                 loop = 0
             elif len(party) == 0:
                 print("Game over!")
                 loop = 0
             elif each['turn'] == subturn:
                 if each['realplayer'] == 1:
-                    print(len(enemies))
+                    print(len(enemylst))
                     print("Turn {} for {}".format(turn, each['name']))
                     subturn +=1
-                    combatmenu(each, party)
+                    combatmenu(each, party, enemylst)
                 else:
                     if len(party) == 0:
                         print("Game over!")
@@ -38,16 +38,16 @@ def maincombat(party, enemies):
                     subturn += 1
                     enemy = actions.enemyattack(party)
                     print("{} attacks {}!".format(each['name'], enemy['name']))
-                    actions.takedmg(each, enemy, enemies)
+                    actions.takedmg(each, enemy, enemylst)
 
         turn += 1
 
 
-def combatmenu(each, party):
+def combatmenu(each, party,enemylst):
         print('What do you want to do? \n1. Fight\n2. Use item\n3. Run')
         choice = input('Choice : ')
         if '1' in choice:
-            choice1(each, party)
+            choice1(each, party, enemylst)
         elif '2' in choice:
             choice2(each)
         elif '3' in choice:
@@ -55,10 +55,10 @@ def combatmenu(each, party):
         else:
             exit()
 
-def choice1(each, party): #Fight an enemy
+def choice1(each, party, enemylst): #Fight an enemy
     generalfunctions.clearScreen()
-    actions.shenemies(enemies)
-    enemy = actions.chenemy(enemies)
+    actions.shenemies(enemylst)
+    enemy = actions.chenemy(enemylst)
     actions.takedmg(each, enemy, party)
     generalfunctions.clearScreen()
 
